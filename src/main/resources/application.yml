@@ -1,0 +1,103 @@
+micronaut:
+  application:
+    name: library-management
+
+  server:
+    port: 8080
+    cors:
+      enabled: true
+    netty:
+      worker:
+        event-loop-group: other
+
+  netty:
+    event-loops:
+      other:
+        num-threads: 10
+    executor:
+      io:
+        type: fixed
+        nthreads: 75
+    default:
+      allocator:
+        max-order: 3
+
+  http:
+    client:
+      read-timeout: 5m
+      max-content-length: 20000000
+
+  security:
+    disable: true
+    authentication: bearer
+    token:
+      jwt:
+        generator:
+          access-token:
+            expiration: 3600
+          refresh-token:
+            secret: 'AKfP8UAqEV9WxfqMyZbrQD02txgh2RfcGppAeYWApKC2S5ZAsNn6Mbeb9OQizy1'
+        signatures:
+          secret:
+            generator:
+              secret: 'PQHqmE4IjaAmKTildsfpvXOaKKS3jigTh3DP0fSSUYI2Wnva9NGo1e3rVExyJf9'
+    intercept-url-map:
+      - pattern: /
+        http-method: GET
+        access:
+          - isAnonymous()
+      - pattern: /static/**
+        http-method: GET
+        access:
+          - isAnonymous()
+      - pattern: /swagger/**
+        http-method: GET
+        access:
+          - isAnonymous()
+
+
+
+  endpoints:
+    oauth:
+      path: /authtoken/refresh_token
+
+
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
+
+  metrics:
+    export:
+      jmx:
+        enabled: true
+        step: PT1M
+      prometheus:
+        enabled: true
+        descriptions: true
+        step: PT1M
+    enabled: true
+
+#datasources:
+#  default:
+#    driver-class-name: org.postgresql.Driver
+#    db-type: postgres
+#    dialect: POSTGRES
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+
+endpoints:
+  prometheus:
+    sensitive: false
+  flyway:
+    enabled: true
+    sensitive: false

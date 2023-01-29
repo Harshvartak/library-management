@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.harsh.projects
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [annotation-api, app-name, assertj, cache-caffeine, data, data-jpa, gradle, http-client, jackson-databind, jackson-xml, java, java-application, jdbc-hikari, junit, junit-params, logback, lombok, management, micrometer, micrometer-annotation, micrometer-jmx, micrometer-prometheus, micronaut-build, mockito, netty-server, openapi, postgres, readme, rxjava3, rxjava3-http-client, security-annotations, security-jwt, shade, swagger-ui, test-resources, yaml]
