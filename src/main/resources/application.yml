@@ -3,7 +3,7 @@ micronaut:
     name: library-management
 
   server:
-    port: 8080
+    port: 9050
     cors:
       enabled: true
     netty:
