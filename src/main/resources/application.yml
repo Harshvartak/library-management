@@ -82,11 +82,13 @@ micronaut:
         step: PT1M
     enabled: true
 
-#datasources:
-#  default:
-#    driver-class-name: org.postgresql.Driver
-#    db-type: postgres
-#    dialect: POSTGRES
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/libraryManagement
+    driverClassName: org.postgresql.Driver
+    username: library_management_user
+    password: 'test'
+    dialect: POSTGRES
 
 jpa:
   default:
@@ -94,6 +96,7 @@ jpa:
       hibernate:
         hbm2ddl:
           auto: update
+        show_sql: true
 
 endpoints:
   prometheus:
